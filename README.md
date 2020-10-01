@@ -21,4 +21,4 @@ To execute the analysis, from the project folder you can run
 Rscript -e "rmarkdown::render('covid report.Rmd')"
 ```
 
-This will create a file called covid report.html output in your directory that contains the results.
+This will create a file called covid-report.html output in your directory that contains the results.
