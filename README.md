@@ -22,3 +22,6 @@ Rscript -e "rmarkdown::render('covid report.Rmd')"
 ```
 
 This will create a file called covid-report.html output in your directory that contains the results.
+
+# Makefile work
+The files of install_package.R, clean_data.R, covid_report.Rmd (not covid-report.Rmd!) are used to execute the Makefile and generate the covid_report.html(not covid-report.html! These two files with "-" are for homework 3). Press "make help" to see the information about Makefile.
