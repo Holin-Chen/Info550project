@@ -1,0 +1,63 @@
+---
+title: "COVID-19 Report in the United States"
+author: "Holin Chen"
+date: "`r format(Sys.Date(), '%Y-%m-%d')`"
+output: 
+  html_document:
+    theme: yeti
+    hightlight: tango
+    code_folding: show
+    df_print: paged
+    fig_width: 7
+    fig_height: 6
+    fig_caption: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+The plot of cumulative COVID-19 cases in the US by state
+```{r, figure}
+knitr::include_graphics("myPlot.png")
+```
+
+
+## Explore data and create table
+
+Now I want to know the case fatality rate (CFR) by calculating deaths divided by cases in each state. I create this new variable. Then I want to see which state or area have the maximum, median, and minimum cases among the US. I extract the rows of this data include the latest case and death counts, and CFR. Finally I put them into a table.
+```{r table}
+#create the new data with the latest case and death counts, and CFR
+source("clean_data.R")
+s <- a %>% 
+  group_by(state) %>%
+  summarise(latest_cases = max(cases, na.rm=T),
+            latest_deaths = max(deaths, na.rm=T),
+            latest_CFR = paste0(round(latest_deaths*100/latest_cases, digits=2),'%'))
+
+#Put the 3 rows into a table
+summary_table <- 
+  s[c(which.max(s$latest_cases),
+      which(s$latest_cases==median(s$latest_cases)),
+      which.min(s$latest_cases)), ]
+
+summary_table$cases_level <- c('max cases','median cases','min cases')
+summary_table <- summary_table[,c(1,5,2:4)]
+
+knitr::kable(summary_table, row.names(c('max cases','median cases','min cases')),align = 'c')
+```
+`r s$state[which.max(s$latest_cases)]` has the most cumulative cases with `r max(s$latest_cases)` cases so far. It's case fatality rate is `r s$latest_CFR[which.max(s$latest_cases)]`. `r s$state[which.min(s$latest_cases)]` has the least cumulative cases with `r min(s$latest_cases)` cases so far. It's case fatality rate is `r s$latest_CFR[which.min(s$latest_cases)]`.
+
+<!--
+I will use the data from this github respository for my final project in this class, which is inconsistent with what I said in homework 1 as my initial thought, casue my thesis progress is kinda slow now and I decide to change my idea to use some public data instead. Also I think using data direclty in github should make my work more reproducible!
+-->
+
+
+
+
+
+
+
+
+
+
+
