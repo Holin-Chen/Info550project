@@ -7,7 +7,7 @@ The projecy is run on R 4.0.2. To analyze the data you will need to install some
 installed_pkgs <- row.names(installed.packages())
 pkgs <- c("RCurl","dplyr","ggplot2","shadowtext","plotly")
 for(p in pkgs){
-	if(!(p %in% install_pkgs)){
+	if(!(p %in% installed_pkgs)){
 		install.packages(p)
 	}
 }
