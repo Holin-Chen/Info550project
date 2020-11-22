@@ -27,7 +27,7 @@ This will create a file called covid-report.html output in your directory that c
 The files of install_package.R, clean_data.R, covid_report.Rmd (not covid-report.Rmd!) are used to execute the Makefile and generate the covid_report.html(not covid-report.html! These two files with "-" are for homework 3). Press "make help" to see the information about Makefile.
 
 # Dockerfile 
-Downloading the built Docker image from my DockerHub(holinchen/info550-project) by using the command
+Downloading the `docker_test.zip` file in this repository and decompress it. Downloading the built Docker image from my DockerHub(holinchen/info550-project) by using the command
 
 ```
 docker pull holinchen/info550-project:latest
